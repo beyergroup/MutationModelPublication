@@ -1,2 +1,0 @@
-03a_wholeExomePositions.R
-03b_chr1arm_allMuts.R

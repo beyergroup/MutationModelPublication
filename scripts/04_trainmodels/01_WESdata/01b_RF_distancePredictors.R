@@ -1,4 +1,4 @@
-# args = as.numeric(commandArgs(trailingOnly=T))
+args = as.numeric(commandArgs(trailingOnly=T))
 tissues = c("brain","breast", "colon","esophagus","kidney","liver", "lung","ovary",
             "prostate", "skin")
 tissue = tissues[args]
@@ -7,15 +7,14 @@ library(ranger)
 nThreads = 8
 # nPermutations = 10000
 # maxData = 50000
-dir.create("data/Modeling/exomeTrainData/",showWarnings=F)
-dir.create("data/Modeling/exomeTrainData/RF",showWarnings=F)
+dir.create("data/Modeling/exomeTrainData_distancePredictors/",showWarnings=F)
+dir.create("data/Modeling/exomeTrainData_distancePredictors/RF",showWarnings=F)
 
 
-# dumpVar = sapply(tissues, function(tissue){
 print(tissue)
 
 # load data for this tissue######
-load(paste0("data/MutTables/exomeTrainData/", 
+load(paste0("data/MutTables/exomeTrainData_distancePredictors/", 
             tissue, "_Muts_mapped_processed.RData"))
 chroms = unique(datchroms)
 #####
@@ -31,7 +30,7 @@ imp = sapply(chroms, function(cr){
               probability = T, verbose=F)
   return(rf$variable.importance)
 })
-save(imp, file = paste0("data/Modeling/exomeTrainData/RF/", tissue,
+save(imp, file = paste0("data/Modeling/exomeTrainData_distancePredictors/RF/", tissue,
                         "_importances_gini.RData"))
 ######
 
@@ -45,7 +44,7 @@ predictions = lapply(chroms, function(cr){
               write.forest = T, seed = 1234, num.threads =  nThreads,
               respect.unordered.factors = 'partition',
               probability = T, verbose=F, importance = "permutation")
-  save(rf, file = paste0("data/Modeling/exomeTrainData/RF/", tissue, "_", 
+  save(rf, file = paste0("data/Modeling/exomeTrainData_distancePredictors/RF/", tissue, "_", 
                          cr, "_forPrediction.RData"))
   testData = dat[datchroms == cr,]
   p = predict(rf, data = testData, num.threads=nThreads, verbose=F)
@@ -53,7 +52,7 @@ predictions = lapply(chroms, function(cr){
   return(temp)
 })
 names(predictions) = chroms
-save(predictions, file = paste0("data/Modeling/exomeTrainData/RF/", tissue,
+save(predictions, file = paste0("data/Modeling/exomeTrainData_distancePredictors/RF/", tissue,
                                 "_predictions.RData"))
 cat('\n')
 #####
@@ -69,13 +68,13 @@ rf = ranger(mutated ~ ., data = dat,
             write.forest = T, seed = 1234, num.threads =  nThreads,
             respect.unordered.factors = 'partition',
             probability = T, verbose=F)
-save(rf, importance, file = paste0("data/Modeling/exomeTrainData/RF/", tissue, "_", 
+save(rf, importance, file = paste0("data/Modeling/exomeTrainData_distancePredictors/RF/", tissue, "_", 
                                    "finalModel.RData"))
 
 #####
 
 print("done")
-# })
+
 
 
 

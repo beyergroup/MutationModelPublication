@@ -194,14 +194,14 @@ process_tissue_partial <- function(tissue, start_part, end_part) {
 }
 
 # Determine part range based on argument
-if (part_range == "1-20") {
-  start_part <- 1
-  end_part <- 20
+if (part_range == "41-60") {
+  start_part <- 41
+  end_part <- 60
 } else if (part_range == "51-100") {
   start_part <- 51
   end_part <- 100
 } else {
-  stop("Invalid part range. Use '1-20' or '51-100'")
+  stop("Invalid part range. Use '41-60' or '51-100'")
 }
 
 # Process all tissues for the specified part range

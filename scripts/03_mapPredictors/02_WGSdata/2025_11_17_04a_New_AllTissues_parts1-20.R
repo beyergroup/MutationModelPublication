@@ -11,8 +11,9 @@ chr_num <- as.integer(args[1])
 part_range <- as.character(args[2])  # "1-3" or "51-100"
 
 chr <- paste0("chr", chr_num)
-#tissues <- c("brain","breast","esophagus", "kidney", "liver", "ovary", "prostate", "skin")
-tissues <- c("liver")
+#tissues <- c( "brain","breast","esophagus","kidney", "ovary", "prostate", "skin")
+#tissues <- '"brain","breast","esophagus",'
+tissues <- c('liver')
 
 setwd('/cellfile/cellnet/MutationModel/')
 source("lib/dataMapping.R")

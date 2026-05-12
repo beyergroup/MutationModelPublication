@@ -2,7 +2,7 @@ library(readxl)
 source("scripts/05_analysis/00_NamesAndColors.R")
 library(ROCR)
 library(ranger) 
-
+library(pROC)
 
 # get mutation rate and nPositions, percTP, correlation etc. (dataInfos) #####
 dataInfos = sapply(tissues, function(tissue){

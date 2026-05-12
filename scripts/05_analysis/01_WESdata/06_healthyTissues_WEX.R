@@ -38,13 +38,29 @@ sum(nMuts)
 tissues2Remove = names(which(nMuts<100))
 png(paste0("fig/healthyTissuesWEX/nMuts", plotEnding, ".png"),
     width = 1000, height = 1000, pointsize = 20)
-par(mar = c(4,10,1,1))
+par(mar= c(4,10,1,1))
 barplot(rev(nMuts), horiz = T, las = 1, xlab = "n Mutations",
         border = (names(rev(nMuts)) %in% tissues2Remove)+1)
 abline(v = 100)
 dev.off()
 sum(nMuts[!names(nMuts) %in% tissues2Remove])
 #####
+
+# number of mutations #####for rebuttal - removing tissues2Remove = names(which(nMuts<100)) from the plot
+
+nMuts2Plot <- nMuts[!(names(nMuts) %in% tissues2Remove)]
+png(paste0("fig/healthyTissuesWEX/nMuts_rebuttal_suppFig13A_20260422_YP.png"),
+    width = 2000, height = 1000, pointsize = 20)
+par(mar = c(10, 4, 1, 1), mgp = c(4, 1, 0))
+bp <- barplot(nMuts2Plot, las = 2, ylab = "Number of mutations", xaxt = "n", cex.axis = 1.2, cex.lab = 1.6)
+abline(h = 100)
+text(x = bp, y = -max(nMuts2Plot)*0.02, labels = names(nMuts2Plot),
+     srt = 45, adj = 1, xpd = TRUE, cex = 1.4)
+dev.off()
+
+
+
+
 
 
 # tissue-specific models #####

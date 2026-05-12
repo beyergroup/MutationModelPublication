@@ -11,8 +11,8 @@ chr_num <- as.integer(args[1])
 part_range <- as.character(args[2])  # "1-3" or "51-100"
 
 chr <- paste0("chr", chr_num)
-#tissues <- c("brain","breast","esophagus", "kidney", "liver", "ovary", "prostate", "skin")
-tissues <- c("liver")
+#tissues <- c("brain","breast","esophagus", "kidney", "ovary", "prostate", "skin")
+tissues <- c('esophagus','kidney','prostate')
 
 setwd('/cellfile/cellnet/MutationModel/')
 source("lib/dataMapping.R")
@@ -194,14 +194,14 @@ process_tissue_partial <- function(tissue, start_part, end_part) {
 }
 
 # Determine part range based on argument
-if (part_range == "1-20") {
-  start_part <- 1
-  end_part <- 20
+if (part_range == "81-100") {
+  start_part <- 81
+  end_part <- 100
 } else if (part_range == "51-100") {
   start_part <- 51
   end_part <- 100
 } else {
-  stop("Invalid part range. Use '1-20' or '51-100'")
+  stop("Invalid part range. Use '81-100' or '51-100'")
 }
 
 # Process all tissues for the specified part range
