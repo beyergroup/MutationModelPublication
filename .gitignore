@@ -1,0 +1,22 @@
+# Ignore everything by default
+/*
+
+# But not these specific files/folders
+!/.gitignore
+!/scripts/
+!/lib/
+!/data/
+
+# Inside lib/, ignore everything except the two R files
+/lib/*
+!/lib/dataMapping.R
+!/lib/general_function.R
+
+# Inside data/, ignore everything except rawdata/
+/data/*
+!/data/rawdata/
+
+# Inside data/rawdata/, ignore everything except the two xlsx files
+/data/rawdata/*
+!/data/rawdata/dataMappingAlltissues.xlsx
+!/data/rawdata/dataMappingAlltissues_WGS.xlsx
