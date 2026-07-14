@@ -8,7 +8,7 @@ args <- commandArgs(trailingOnly = TRUE)
 task_id <- as.integer(args[1])  # SLURM_ARRAY_TASK_ID (1-22)
 cr <- paste0("chr", task_id)    # Maps to chr1-chr22
 
-# Load exonic regions (only once)
+# Load non-excludable regions (only once)
 load("/cellfile/datapublic/ypaul1/Mutations/results/GenomePredictions/autosomes_non_excludable_regions.RData")
 
 # Chromosome lengths (hg19)

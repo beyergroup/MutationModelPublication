@@ -12,7 +12,7 @@ genome_autosomes <- getSeq(BSgenome.Hsapiens.UCSC.hg19, autosomes)
 
 
 # 3. Load the excludable regions 
-load("/cellfile/cellnet/MutationModel/data/predictors/wgEncodeDacMapabilityConsensusExcludable.RData")
+load("data/predictors/wgEncodeDacMapabilityConsensusExcludable.RData")
 ##the loaded object is called gr
 # Create a GRanges object covering the entire autosomes
 autosome_ranges <- GRanges(seqnames = autosomes,
@@ -28,7 +28,7 @@ result_df <- result_df[, c("seqnames", "start", "end", "width", "strand")]
 colnames(result_df)[1] <- "chr"
 
 # Save as RData
-save(result_df, file = "/cellfile/datapublic/ypaul1/Mutations/results/GenomePredictions/autosomes_non_excludable_regions.RData")
+save(result_df, file = "data/processedData/autosomes_non_excludable_regions.RData")
 
 # Optional: View the first few rows
 head(result_df)
